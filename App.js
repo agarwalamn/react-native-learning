@@ -1,29 +1,37 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View,ScrollView} from 'react-native';
+import { StyleSheet, Text, View,ScrollView, FlatList} from 'react-native';
 
 export default function App() {
   const [people, setPeople] = useState([
-    { name: 'shaun', id: '1' },
-    { name: 'yoshi', id: '2' },
-    { name: 'mario', id: '3' },
-    { name: 'luigi', id: '4' },
-    { name: 'peach', id: '5' },
-    { name: 'toad', id: '6' },
-    { name: 'bowser', id: '7' },
+    { name: 'kira', id: '1' },
+    { name: 'alkatraz', id: '2' },
+    { name: 'snakeeyes', id: '3' },
+    { name: 'kirito', id: '4' },
+    { name: 'python', id: '5' },
+    { name: 'price', id: '6' },
+    { name: 'panda', id: '7' },
   ]);
 
   return (
     
-      <ScrollView>
+      // <ScrollView>
         <View style={styles.container}>
-        {people.map((users)=>{
+          <FlatList
+          //numColumns
+          //keyExtractor
+            data={people}
+            renderItem={({item})=>(
+              <Text style={styles.item}>{item.name}</Text>
+            )}
+          />
+        {/* {people.map((users)=>{
           return(
             <View key={users.id}>
               <Text style={styles.item}>{users.name}</Text>
             </View>
-          )})}
+          )})} */}
         </View>
-      </ScrollView>
+      // </ScrollView>
     
   );
 }
@@ -33,12 +41,15 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 40,
     paddingHorizontal: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
   },
   item:{
     marginTop:24,
     padding:30,
-    backgroundColor:'teal',
-    fontSize:24
-  }
+    backgroundColor:'white',
+    fontSize:24,
+    color:"#000",
+    textAlign:'center'
+  },
+
 });
