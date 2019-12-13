@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View,ScrollView, FlatList} from 'react-native';
+import { StyleSheet, Text, View,FlatList, TouchableOpacity} from 'react-native';
+
+
 
 export default function App() {
   const [people, setPeople] = useState([
@@ -11,28 +13,25 @@ export default function App() {
     { name: 'price', id: '6' },
     { name: 'panda', id: '7' },
   ]);
+const pressHandler=(id)=>{
+  setPeople( (prevPeople)=> {
+    return prevPeople.filter(person=>person.id != id)
+  })
+}
 
   return (
-    
-      // <ScrollView>
-        <View style={styles.container}>
-          <FlatList
-          //numColumns
-          //keyExtractor
-            data={people}
-            renderItem={({item})=>(
-              <Text style={styles.item}>{item.name}</Text>
-            )}
-          />
-        {/* {people.map((users)=>{
-          return(
-            <View key={users.id}>
-              <Text style={styles.item}>{users.name}</Text>
-            </View>
-          )})} */}
-        </View>
-      // </ScrollView>
-    
+    <View style={styles.container}>
+      <FlatList
+      numColumns={2}
+        keyExtractor={(item)=>item.id}
+        data={people}
+        renderItem={({item})=>(
+          <TouchableOpacity onPress={()=>pressHandler(item.id)}>
+            <Text style={styles.item}>{item.name}</Text>
+          </TouchableOpacity>
+        )}
+      />
+    </View>
   );
 }
 
@@ -49,7 +48,9 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     fontSize:24,
     color:"#000",
-    textAlign:'center'
+    textAlign:'center',
+    marginHorizontal:10,
+    marginTop:10
   },
 
 });
